@@ -250,114 +250,121 @@ function ProductCard({ card, onPlay }: { card: WorkCard; onPlay: (card: WorkCard
     : undefined)
 
   return (
-    <article
+    <div
       className="featured-card"
       onClick={() => onPlay(card)}
       style={{
-        position: 'relative',
-        width: 'clamp(280px, 72vw, 1040px)',
         flexShrink: 0,
-        borderRadius: '1.25rem',
-        overflow: 'hidden',
-        aspectRatio: '16 / 9',
+        width: 'clamp(280px, 68vw, 960px)',
         cursor: 'pointer',
-        transition: 'transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
-      {/* Background */}
-      <div
+      {/* Video thumbnail — aspect-ratio container */}
+      <article
+        className="featured-card-video"
         style={{
-          position: 'absolute',
-          inset: 0,
-          background: card.gradient,
+          position: 'relative',
+          width: '100%',
+          borderRadius: '1.25rem',
+          overflow: 'hidden',
+          aspectRatio: '16 / 9',
+          transition: 'transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
         }}
       >
-        {thumbnailSrc && (
-          <img
-            src={thumbnailSrc}
-            alt={card.title}
-            onError={!card.poster ? () => setThumbError(true) : undefined}
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              opacity: 0.65,
-            }}
-          />
-        )}
-      </div>
-
-      {/* Gradient overlay */}
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.15) 60%, transparent 100%)',
-      }} />
-
-      {/* Play button */}
-      <div
-        className="play-overlay"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          opacity: 0,
-          transition: 'opacity 0.2s ease',
-        }}
-      >
-        <div style={{
-          width: '56px',
-          height: '56px',
-          borderRadius: '50%',
-          backgroundColor: 'rgba(255,255,255,0.15)',
-          backdropFilter: 'blur(8px)',
-          border: '1px solid rgba(255,255,255,0.3)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#fff',
-        }}>
-          <Play size={20} fill="currentColor" />
+        {/* Background gradient + thumbnail */}
+        <div style={{ position: 'absolute', inset: 0, background: card.gradient }}>
+          {thumbnailSrc && (
+            <img
+              src={thumbnailSrc}
+              alt={card.title}
+              onError={!card.poster ? () => setThumbError(true) : undefined}
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                opacity: 0.65,
+              }}
+            />
+          )}
         </div>
-      </div>
 
-      {/* Content */}
+        {/* Subtle bottom scrim for visual depth */}
+        <div style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '40%',
+          background: 'linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 100%)',
+          pointerEvents: 'none',
+        }} />
+
+        {/* Play button — revealed on hover */}
+        <div
+          className="play-overlay"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            opacity: 0,
+            transition: 'opacity 0.2s ease',
+          }}
+        >
+          <div style={{
+            width: '56px',
+            height: '56px',
+            borderRadius: '50%',
+            backgroundColor: 'rgba(255,255,255,0.15)',
+            backdropFilter: 'blur(8px)',
+            border: '1px solid rgba(255,255,255,0.3)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#fff',
+          }}>
+            <Play size={20} fill="currentColor" />
+          </div>
+        </div>
+      </article>
+
+      {/* Text below the video */}
       <div style={{
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        padding: 'clamp(1.25rem, 3vw, 2rem)',
+        padding: 'clamp(1rem, 1.5vw, 1.25rem) 0.125rem 0',
       }}>
-        <span className="type-label" style={{ color: 'rgba(255,255,255,0.5)', display: 'block', marginBottom: '0.5rem' }}>
+        <span
+          className="type-label"
+          style={{ color: 'var(--color-muted)', display: 'block', marginBottom: '0.375rem' }}
+        >
           {card.tag}
         </span>
         <h3 style={{
           fontFamily: 'Metropolis, Inter, sans-serif',
           fontWeight: 300,
-          fontSize: 'clamp(1.125rem, 2.5vw, 1.75rem)',
-          color: '#fff',
+          fontSize: 'clamp(1rem, 1.75vw, 1.375rem)',
+          color: 'var(--color-text)',
           margin: 0,
-          lineHeight: 1.2,
+          lineHeight: 1.25,
         }}>
           {card.title}
         </h3>
         <p style={{
           fontFamily: 'Metropolis, Inter, sans-serif',
           fontWeight: 300,
-          fontSize: 'clamp(0.8125rem, 1.2vw, 1rem)',
-          color: 'rgba(255,255,255,0.55)',
-          margin: '0.5rem 0 0',
+          fontSize: 'clamp(0.75rem, 0.9vw, 0.875rem)',
+          color: 'var(--color-muted)',
+          margin: '0.375rem 0 0',
           lineHeight: 1.55,
         }}>
           {card.description}
         </p>
       </div>
-    </article>
+    </div>
   )
 }
 
@@ -377,8 +384,7 @@ export default function FeaturedWork() {
 
     const mm = gsap.matchMedia()
 
-    mm.add('(min-width: 769px)', () => {
-      // Total horizontal distance the track must travel
+    mm.add('(min-width: 1025px)', () => {
       const getTotalScroll = () => track.scrollWidth - window.innerWidth
 
       const tl = gsap.timeline({
@@ -395,7 +401,10 @@ export default function FeaturedWork() {
 
       tl.to(track, { x: () => -getTotalScroll(), ease: 'none' })
 
-      return () => { ScrollTrigger.getAll().forEach(st => st.kill()) }
+      return () => {
+        ScrollTrigger.getAll().forEach(st => st.kill())
+        gsap.set(track, { clearProps: 'x' })
+      }
     })
 
     return () => { mm.revert() }
@@ -406,21 +415,44 @@ export default function FeaturedWork() {
       {activeCard && <VideoModal card={activeCard} onClose={handleClose} />}
 
       <style>{`
-        /* Play overlay on hover */
+        /* Hover: reveal play button */
         .featured-card:hover .play-overlay { opacity: 1 !important; }
 
-        /* Scale on hover — pointer devices only */
+        /* Hover: scale only the video thumbnail, not the text below */
         @media (hover: hover) and (pointer: fine) {
-          .featured-card:hover { transform: scale(1.018) !important; }
+          .featured-card:hover .featured-card-video { transform: scale(1.018); }
         }
 
-        /* Mobile: native horizontal scroll */
-        @media (max-width: 768px) {
+        /* Desktop: section is exactly 100vh, content vertically centred */
+        @media (min-width: 1025px) {
+          #products { height: 100vh; }
+          .products-inner {
+            height: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+          }
+        }
+
+        /* Mobile + iPad: native horizontal scroll with snap */
+        @media (max-width: 1024px) {
+          /* Allow track to scroll — section overflow:hidden clips the padding */
+          #products { overflow: visible !important; }
           .products-track {
             overflow-x: auto;
+            scroll-snap-type: x mandatory;
             scrollbar-width: none;
+            /* Align left edge with other page content; scroll-padding keeps snap intact */
+            padding-left: clamp(1.25rem, 4vw, 2rem) !important;
+            scroll-padding-left: clamp(1.25rem, 4vw, 2rem);
           }
           .products-track::-webkit-scrollbar { display: none; }
+          .featured-card { scroll-snap-align: start; }
+          /* Align hint text with track's left edge */
+          .products-hint { padding-left: clamp(1.25rem, 4vw, 2rem) !important; }
         }
       `}</style>
 
@@ -429,25 +461,24 @@ export default function FeaturedWork() {
         ref={sectionRef}
         style={{ overflow: 'hidden', backgroundColor: 'var(--color-bg)' }}
       >
-        <div style={{ paddingTop: 'clamp(5rem, 6vw, 6rem)', paddingBottom: 'clamp(2.5rem, 4vw, 3.5rem)' }}>
-
-          {/* ── Section header — aligned to same container as <Header> ── */}
-          <div
+        <div
+          className="products-inner"
+          style={{ paddingTop: 'clamp(1.5rem, 3vw, 2.5rem)', paddingBottom: 'clamp(2rem, 3vw, 3rem)' }}
+        >
+          {/* Hint text — left-aligned with card track */}
+          <p
+            className="products-hint"
             style={{
-              maxWidth: '1400px',
-              margin: '0 auto',
-              padding: '0 1.5rem',
-              marginBottom: '2.5rem',
-              display: 'flex',
-              alignItems: 'flex-end',
-              justifyContent: 'flex-end',
+              margin: '0 0 1.5rem',
+              fontSize: '0.8rem',
+              color: 'var(--color-muted)',
+              paddingLeft: 'calc(max((100vw - 1400px) / 2, 0px) + clamp(1.5rem, 2.5vw, 2.5rem))',
+              fontFamily: 'Metropolis, Inter, sans-serif',
+              letterSpacing: '0.04em',
             }}
-            className="md:px-10"
           >
-            <p className="type-meta" style={{ margin: 0 }}>
-              Click to play · Scroll to explore →
-            </p>
-          </div>
+            Click to play · Scroll to explore →
+          </p>
 
           {/* ── Card track ──
               Left padding mirrors the header container so card 1 left-aligns
@@ -460,11 +491,7 @@ export default function FeaturedWork() {
             style={{
               display: 'flex',
               gap: 'clamp(1.25rem, 2vw, 2rem)',
-              // Align left edge with header container:
-              // on ≤1400px viewports = inner padding only
-              // on >1400px viewports = auto centering offset + inner padding
               paddingLeft: 'calc(max((100vw - 1400px) / 2, 0px) + clamp(1.5rem, 2.5vw, 2.5rem))',
-              // Right trailing space so the partial next-card peek is visible
               paddingRight: 'clamp(2rem, 6vw, 6rem)',
             }}
           >

@@ -9,6 +9,7 @@ const AILabs = lazy(() => import('@/pages/Notes'))
 const PhilosophyPage = lazy(() => import('@/pages/PhilosophyPage'))
 const AboutPage = lazy(() => import('@/pages/AboutPage'))
 const WorkPage = lazy(() => import('@/pages/WorkPage'))
+const BookingPage = lazy(() => import('@/pages/BookingPage'))
 
 function LoadingScreen() {
   return (
@@ -44,6 +45,7 @@ export default function App() {
         <Route path="/philosophy" element={<PhilosophyPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/work" element={<WorkPage />} />
+        <Route path="/book" element={<BookingPage />} />
       </Routes>
     </Suspense>
   )

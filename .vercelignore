@@ -1,0 +1,25 @@
+# Source assets — large videos/images not needed for build
+Sources img videos/
+
+# Build output (Vercel builds from source)
+dist/
+dist-ssr/
+
+# Dev tooling
+.claude/
+.superpowers/
+docs/superpowers/
+
+# Archives and upload staging
+archive/
+youtube-upload/
+
+# All video files
+*.mp4
+*.mov
+*.webm
+*.avi
+*.mkv
+*.m4v
+*.wmv
+*.flv

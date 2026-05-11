@@ -89,10 +89,21 @@ export default function DesignNotes() {
   const gridNotes = AI_LABS.slice(1)
 
   return (
+    <>
+    <style>{`
+      @media (max-width: 639px) {
+        .featured-read-row {
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          gap: 0.75rem !important;
+        }
+        .featured-read-row p { max-width: 100% !important; }
+      }
+    `}</style>
     <section
       id="ai-labs"
       style={{
-        paddingTop: 'clamp(5rem, 10vw, 9rem)',
+        paddingTop: 'clamp(4rem, 8vw, 7rem)',
         paddingBottom: 'clamp(3rem, 5vw, 5rem)',
         paddingLeft: 'clamp(1.5rem, 6vw, 5rem)',
         paddingRight: 'clamp(1.5rem, 6vw, 5rem)',
@@ -148,8 +159,8 @@ export default function DesignNotes() {
                 <h3 className="type-name" style={{ fontSize: '1.375rem', margin: 0, lineHeight: 1.25 }}>
                   {featured.title}
                 </h3>
-                {/* Excerpt + Read on same row */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                {/* Excerpt + Read on same row; stacks vertically on mobile */}
+                <div className="featured-read-row" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
                   <p className="type-body" style={{ flex: 1, fontSize: '1.0625rem', margin: 0, opacity: 0.65, lineHeight: 1.65 }}>
                     {featured.excerpt}
                   </p>
@@ -222,5 +233,6 @@ export default function DesignNotes() {
 
       </div>
     </section>
+    </>
   )
 }

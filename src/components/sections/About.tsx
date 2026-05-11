@@ -8,7 +8,7 @@ export default function About() {
     <section
       id="about"
       style={{
-        padding: 'clamp(5rem, 10vw, 9rem) clamp(1.5rem, 6vw, 5rem)',
+        padding: 'clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 5rem)',
       }}
     >
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>

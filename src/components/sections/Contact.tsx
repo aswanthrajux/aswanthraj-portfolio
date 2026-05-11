@@ -1,4 +1,5 @@
 import { Mail } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { FadeIn } from '@/components/ui/FadeIn'
 
 export default function Contact() {
@@ -58,13 +59,9 @@ export default function Contact() {
               <Mail size={16} />
               aswanthraj.ux@gmail.com
             </a>
-            <button
-              disabled
-              className="btn btn-outline"
-              style={{ opacity: 0.45, cursor: 'not-allowed' }}
-            >
-              Book a call (coming soon)
-            </button>
+            <Link to="/book" className="btn btn-outline">
+              Schedule a call
+            </Link>
           </div>
 
         </FadeIn>
