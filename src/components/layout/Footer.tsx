@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Dribbble, Linkedin, Twitter, Instagram } from 'lucide-react'
+import { trackEvent } from '@/lib/analytics'
 
 const SOCIAL = [
   { icon: Dribbble, label: 'Dribbble', href: 'https://dribbble.com/ashwanth' },
@@ -80,6 +81,10 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
+                onClick={() => {
+                  trackEvent('outbound_link_click', { label, url: href, page_path: window.location.pathname })
+                  trackEvent('contact_click', { type: 'social', label, destination: href })
+                }}
                 style={{
                   width: '34px',
                   height: '34px',

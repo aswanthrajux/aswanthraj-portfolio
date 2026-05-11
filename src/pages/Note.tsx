@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState, useCallback, type ReactNode } from 'react'
+import { trackEvent } from '@/lib/analytics'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { ArrowUpRight, Clock, Tag } from 'lucide-react'
 import { MDXProvider } from '@mdx-js/react'
@@ -538,13 +539,23 @@ export default function Note() {
   const [tocItems, setTocItems] = useState<ToCItem[]>([])
   const [activeId, setActiveId] = useState('')
   const [pageMeta, setPageMeta] = useState<PageMeta | null>(null)
+  const viewFiredRef = useRef<string | null>(null)
 
   useEffect(() => {
     window.scrollTo({ top: 0 })
     setTocItems([])
     setActiveId('')
     setPageMeta(null)
+    viewFiredRef.current = null
   }, [slug])
+
+  // Fire ai_lab_view once per slug load, after meta is available
+  useEffect(() => {
+    if (!pageMeta?.title || !slug) return
+    if (viewFiredRef.current === slug) return
+    viewFiredRef.current = slug
+    trackEvent('ai_lab_view', { slug, title: pageMeta.title })
+  }, [pageMeta, slug])
 
   const handleMeta = useCallback((m: PageMeta) => {
     setPageMeta(prev =>

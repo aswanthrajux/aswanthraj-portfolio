@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowUpRight, Play, X } from 'lucide-react'
 import { saveScrollAnchor } from '@/utils/scrollRestore'
+import { trackEvent } from '@/lib/analytics'
 
 function getYouTubeId(url: string): string | null {
   const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([^?&#\n]+)/)
@@ -140,6 +141,17 @@ function VideoModal({ card, onClose }: { card: WorkCard; onClose: () => void }) 
       document.body.style.overflow = ''
     }
   }, [onClose])
+
+  // Fire video_play once on modal open (autoplay=1 means it plays immediately)
+  useEffect(() => {
+    trackEvent('video_play', {
+      video_title: card.title,
+      video_id_or_url: card.video,
+      page_path: window.location.pathname,
+      section: 'featured-work',
+      content_type: card.tag,
+    })
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div
@@ -374,7 +386,16 @@ export default function FeaturedWork() {
   const sectionRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const [activeCard, setActiveCard] = useState<WorkCard | null>(null)
-  const handlePlay = useCallback((card: WorkCard) => setActiveCard(card), [])
+  const handlePlay = useCallback((card: WorkCard) => {
+    trackEvent('video_thumbnail_click', {
+      video_title: card.title,
+      video_id_or_url: card.video,
+      page_path: window.location.pathname,
+      section: 'featured-work',
+      content_type: card.tag,
+    })
+    setActiveCard(card)
+  }, [])
   const handleClose = useCallback(() => setActiveCard(null), [])
 
   useEffect(() => {

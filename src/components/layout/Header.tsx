@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Sun, Moon, Menu, X, Download } from 'lucide-react'
 import { useTheme } from '@/hooks/useTheme'
+import { trackEvent } from '@/lib/analytics'
 
 const NAV_LINKS = [
   { label: 'Case Studies', href: '/#case-studies' },
@@ -130,6 +131,10 @@ export default function Header() {
               href="/resume/aswanthraj_ux_resume_2026.pdf"
               download
               title="Download Resume"
+              onClick={() => {
+                trackEvent('resume_download', { location: 'header', file_name: 'aswanthraj_ux_resume_2026.pdf' })
+                trackEvent('cta_click', { cta_label: 'Resume', cta_location: 'header', destination: '/resume/aswanthraj_ux_resume_2026.pdf' })
+              }}
               style={{
                 fontFamily: 'Inter, sans-serif',
                 fontSize: '0.875rem',
@@ -150,7 +155,10 @@ export default function Header() {
             </a>
 
             <button
-              onClick={() => handleNavClick('/#contact')}
+              onClick={() => {
+                trackEvent('cta_click', { cta_label: 'Contact', cta_location: 'header', destination: '/#contact' })
+                handleNavClick('/#contact')
+              }}
               style={{
                 fontFamily: 'Inter, sans-serif',
                 fontSize: '0.875rem',
@@ -196,7 +204,10 @@ export default function Header() {
           {/* Mobile: contact + theme toggle + hamburger */}
           <div className="flex md:hidden items-center gap-2">
             <button
-              onClick={() => handleNavClick('/#contact')}
+              onClick={() => {
+                trackEvent('cta_click', { cta_label: 'Contact', cta_location: 'header_mobile', destination: '/#contact' })
+                handleNavClick('/#contact')
+              }}
               style={{
                 fontFamily: 'Inter, sans-serif',
                 fontSize: '0.8125rem',
@@ -316,7 +327,11 @@ export default function Header() {
                 <a
                   href="/resume/aswanthraj_ux_resume_2026.pdf"
                   download
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => {
+                    setMenuOpen(false)
+                    trackEvent('resume_download', { location: 'header_mobile', file_name: 'aswanthraj_ux_resume_2026.pdf' })
+                    trackEvent('cta_click', { cta_label: 'Resume', cta_location: 'header_mobile', destination: '/resume/aswanthraj_ux_resume_2026.pdf' })
+                  }}
                   style={{
                     fontFamily: 'Inter, sans-serif',
                     fontSize: '0.9375rem',

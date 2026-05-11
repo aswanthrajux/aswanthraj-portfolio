@@ -1,6 +1,7 @@
 import { Mail } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { FadeIn } from '@/components/ui/FadeIn'
+import { trackEvent } from '@/lib/analytics'
 
 export default function Contact() {
   return (
@@ -55,11 +56,22 @@ export default function Contact() {
             <a
               href="mailto:aswanthraj.ux@gmail.com"
               className="btn btn-primary"
+              onClick={() => {
+                trackEvent('contact_click', { type: 'email', label: 'aswanthraj.ux@gmail.com', destination: 'mailto:aswanthraj.ux@gmail.com' })
+                trackEvent('cta_click', { cta_label: 'Email', cta_location: 'contact', destination: 'mailto:aswanthraj.ux@gmail.com' })
+              }}
             >
               <Mail size={16} />
               aswanthraj.ux@gmail.com
             </a>
-            <Link to="/book" className="btn btn-outline">
+            <Link
+              to="/book"
+              className="btn btn-outline"
+              onClick={() => {
+                trackEvent('contact_click', { type: 'cal', label: 'Schedule a call', destination: '/book' })
+                trackEvent('cta_click', { cta_label: 'Schedule a call', cta_location: 'contact', destination: '/book' })
+              }}
+            >
               Schedule a call
             </Link>
           </div>

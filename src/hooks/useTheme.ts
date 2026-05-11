@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { trackEvent } from '@/lib/analytics'
 
 type Theme = 'light' | 'dark'
 
@@ -18,7 +19,16 @@ export function useTheme() {
     localStorage.setItem('theme', theme)
   }, [theme])
 
-  const toggleTheme = () => setTheme(t => (t === 'light' ? 'dark' : 'light'))
+  const toggleTheme = () => {
+    setTheme(t => {
+      const next = t === 'light' ? 'dark' : 'light'
+      trackEvent('theme_toggle', {
+        theme: next,
+        page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+      })
+      return next
+    })
+  }
 
   return { theme, toggleTheme, isDark: theme === 'dark' }
 }

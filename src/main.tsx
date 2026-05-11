@@ -4,6 +4,9 @@ import { BrowserRouter } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import App from './App'
 import './styles/globals.css'
+import { initGA } from './lib/analytics'
+
+initGA()
 
 // Apply theme before first paint to prevent flash-of-wrong-theme (FOWT)
 ;(function () {

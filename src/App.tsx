@@ -1,6 +1,8 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { useLenis } from '@/hooks/useLenis'
+import { usePageTracking } from '@/hooks/usePageTracking'
+import { useScrollDepth } from '@/hooks/useScrollDepth'
 import Home from '@/pages/Home'
 
 const CaseStudy = lazy(() => import('@/pages/CaseStudy'))
@@ -34,6 +36,8 @@ function LoadingScreen() {
 
 export default function App() {
   useLenis()
+  usePageTracking()
+  useScrollDepth()
 
   return (
     <Suspense fallback={<LoadingScreen />}>

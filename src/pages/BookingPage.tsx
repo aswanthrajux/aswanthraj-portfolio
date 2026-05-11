@@ -4,6 +4,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { FadeIn } from '@/components/ui/FadeIn'
 import { SEO } from '@/components/ui/SEO'
+import { trackEvent } from '@/lib/analytics'
 
 const SLOTS = [
   {
@@ -89,6 +90,10 @@ export default function BookingPage() {
                   href={slot.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => {
+                    trackEvent('contact_click', { type: 'cal', label: `${slot.duration} ${slot.label}`, destination: slot.href })
+                    trackEvent('outbound_link_click', { label: `Book ${slot.duration}`, url: slot.href, page_path: '/book' })
+                  }}
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -266,6 +271,9 @@ function EmailLink() {
   return (
     <a
       href="mailto:aswanthraj.ux@gmail.com"
+      onClick={() => {
+        trackEvent('contact_click', { type: 'email', label: 'aswanthraj.ux@gmail.com', destination: 'mailto:aswanthraj.ux@gmail.com' })
+      }}
       style={{
         display: 'inline-flex',
         alignItems: 'center',

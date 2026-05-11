@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { getLenis } from '../../hooks/useLenis'
+import { trackEvent } from '@/lib/analytics'
 
 const CREDIBILITY = [
   { value: '15+', label: 'Years Experience' },
@@ -253,13 +254,19 @@ export default function Hero() {
         >
           <button
             className="btn btn-primary"
-            onClick={() => scrollToId('case-studies')}
+            onClick={() => {
+              trackEvent('cta_click', { cta_label: 'View Work', cta_location: 'hero', destination: '#case-studies' })
+              scrollToId('case-studies')
+            }}
           >
             View Work
           </button>
           <button
             className="btn btn-outline"
-            onClick={() => scrollToId('contact')}
+            onClick={() => {
+              trackEvent('cta_click', { cta_label: 'Contact', cta_location: 'hero', destination: '#contact' })
+              scrollToId('contact')
+            }}
           >
             Contact
           </button>

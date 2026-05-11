@@ -1,4 +1,5 @@
 import { useRef, useState, useCallback, useEffect } from 'react'
+import { trackEvent } from '@/lib/analytics'
 
 interface VideoPlayerProps {
   src: string
@@ -7,6 +8,9 @@ interface VideoPlayerProps {
   autoPlay?: boolean
   loop?: boolean
   initialMuted?: boolean
+  videoTitle?: string
+  section?: string
+  contentType?: string
 }
 
 const SPEEDS = [0.5, 1, 1.25, 1.5, 2]
@@ -25,11 +29,17 @@ export function VideoPlayer({
   autoPlay = false,
   loop = false,
   initialMuted = false,
+  videoTitle,
+  section,
+  contentType,
 }: VideoPlayerProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const seekBarRef = useRef<HTMLDivElement>(null)
   const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const thumbnailClickFiredRef = useRef(false)
+  const playFiredRef = useRef(false)
 
   const [playing, setPlaying] = useState(autoPlay)
   const [muted, setMuted] = useState(initialMuted)
@@ -66,6 +76,16 @@ export function VideoPlayer({
     const v = videoRef.current
     if (!v) return
     if (v.paused) {
+      if (!thumbnailClickFiredRef.current) {
+        thumbnailClickFiredRef.current = true
+        trackEvent('video_thumbnail_click', {
+          video_title: videoTitle ?? src,
+          video_id_or_url: src,
+          page_path: window.location.pathname,
+          section: section ?? 'unknown',
+          content_type: contentType ?? 'video',
+        })
+      }
       v.play()
       setPlaying(true)
       scheduleHide()
@@ -75,13 +95,26 @@ export function VideoPlayer({
       if (hideTimerRef.current) clearTimeout(hideTimerRef.current)
       setControlsVisible(true)
     }
-  }, [scheduleHide])
+  }, [scheduleHide, videoTitle, src, section, contentType])
 
   // Keep state in sync with native play/pause events (e.g. OS media keys)
   useEffect(() => {
     const v = videoRef.current
     if (!v) return
-    const onPlay = () => { setPlaying(true); scheduleHide() }
+    const onPlay = () => {
+      setPlaying(true)
+      scheduleHide()
+      if (!playFiredRef.current) {
+        playFiredRef.current = true
+        trackEvent('video_play', {
+          video_title: videoTitle ?? src,
+          video_id_or_url: src,
+          page_path: window.location.pathname,
+          section: section ?? 'unknown',
+          content_type: contentType ?? 'video',
+        })
+      }
+    }
     const onPause = () => { setPlaying(false); setControlsVisible(true) }
     const onEnded = () => { if (!loop) { setPlaying(false); setControlsVisible(true) } }
     v.addEventListener('play', onPlay)
@@ -92,7 +125,7 @@ export function VideoPlayer({
       v.removeEventListener('pause', onPause)
       v.removeEventListener('ended', onEnded)
     }
-  }, [loop, scheduleHide])
+  }, [loop, scheduleHide, videoTitle, src, section, contentType])
 
   // ─── Volume ───────────────────────────────────────────────────────────────
 
