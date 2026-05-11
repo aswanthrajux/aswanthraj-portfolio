@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion'
+import { getLenis } from '../../hooks/useLenis'
 
 const CREDIBILITY = [
   { value: '15+', label: 'Years Experience' },
   { value: '10+', label: 'Design Awards' },
   { value: '30+', label: 'Products Shipped' },
-  { value: '1', label: 'Patent Filed' },
+  { value: '200M+', label: 'Users Reached' },
 ]
 
 const container = {
@@ -63,6 +64,17 @@ function BrandLogo() {
   )
 }
 
+function scrollToId(id: string) {
+  const lenis = getLenis()
+  const target = document.getElementById(id)
+  if (!target) return
+  if (lenis) {
+    lenis.scrollTo(target, { offset: 0 })
+  } else {
+    target.scrollIntoView({ behavior: 'smooth' })
+  }
+}
+
 export default function Hero() {
   return (
     <section
@@ -72,7 +84,7 @@ export default function Hero() {
         flexDirection: 'column',
         justifyContent: 'flex-start',
         paddingTop: 'clamp(8rem, 16vh, 11rem)',
-        paddingBottom: 'clamp(1.5rem, 2.5vw, 2rem)',
+        paddingBottom: 'clamp(0rem, 1vw, 1rem)',
         paddingLeft: 'clamp(1.5rem, 6vw, 6rem)',
         paddingRight: 'clamp(1.5rem, 6vw, 6rem)',
         maxWidth: '1400px',
@@ -227,6 +239,30 @@ export default function Hero() {
               </div>
             ))}
           </div>
+        </motion.div>
+
+        {/* CTA buttons */}
+        <motion.div
+          variants={item}
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '0.875rem',
+            marginTop: '2.75rem',
+          }}
+        >
+          <button
+            className="btn btn-primary"
+            onClick={() => scrollToId('case-studies')}
+          >
+            View Work
+          </button>
+          <button
+            className="btn btn-outline"
+            onClick={() => scrollToId('contact')}
+          >
+            Contact
+          </button>
         </motion.div>
       </motion.div>
     </section>
