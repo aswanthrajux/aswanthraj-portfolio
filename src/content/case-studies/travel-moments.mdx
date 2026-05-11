@@ -1,0 +1,209 @@
+---
+title: "Travel Moments: Designing Shared AI Experiences on TV"
+excerpt: "Turning collective attention into an AI-native travel experience on TV."
+date: "2026-02-08"
+tag: "AI · Consumer Product"
+coverImage: "/images/case-studies/travel-moments-cover.webp"
+readTime: "10 min read"
+status: "published"
+---
+
+import { ProtectedSection } from '@/components/ui/ProtectedSection'
+
+<SectionEyebrow>The Situation</SectionEyebrow>
+
+## Fashion belongs to one person. Travel is more naturally shared.
+
+Glance Ambient runs on a shared screen. Fashion try-on had proven the case for AI-generated identity on TV. But it was inherently personal. One person sees themselves in an outfit. Everyone else watches.
+
+Travel changed that equation.
+
+<SectionEyebrow>Problem &amp; Reframe</SectionEyebrow>
+
+## The screen was right. The category wasn't.
+
+Fashion worked. But the engagement data kept showing the same pattern: one person drove the interaction while everyone else sat out. That's an individual loop on a shared surface. It wasn't wrong. It wasn't the full potential of what a TV could do.
+
+The product needed a category that felt more naturally engaging on a passive, ambient surface.
+
+We stopped asking "how do we expand the category?" and started asking "what kind of content makes multiple people lean in at the same time?"
+
+<ReframeList items={[
+  ["Individual", "Collective"],
+  ["Browsing", "Exploring"],
+  ["Shopping", "Imagining"]
+]} />
+
+<SectionEyebrow>The Insight</SectionEyebrow>
+
+## People don't argue over where to buy. They argue over where to go.
+
+Travel is aspirational by nature. It invites opinions, decisions, and disagreement. A family doesn't all agree on fashion. But they will all lean in when a destination appears on screen. That shared curiosity was the lever.
+
+The opportunity was not to build a travel itinerary tool. It was to create an experience where exploring a destination felt worth doing on a big screen, and where the output was something worth showing to whoever else was in the room.
+
+<MediaBlock
+  src="https://youtu.be/PiFbdzpKpqc"
+  alt="Travel Moments on Glance Ambient TV"
+  caption="Travel Moments on the ambient screen."
+/>
+
+<SectionEyebrow>The System</SectionEyebrow>
+
+## A loop that earns attention before it asks for anything.
+
+The system had to earn attention from the ambient state, not demand it. Every step had to work without the next one. TV viewers don't commit to onboarding.
+
+<SystemLoop
+  steps={["Ambient", "Entry", "Vibe", "Map", "Explore", "Generate"]}
+  descriptions={[
+    "Travel content surfaces on L0. No action required. The screen does its job passively.",
+    "User selects 'Create My Moments'. The experience begins from the ambient state.",
+    "User picks a travel vibe: Adventure, Relaxation, or Discovery. Three options only.",
+    "System generates a 3D AI map of the destination. Geography rendered as a world, not a pin.",
+    "User navigates routes, landmarks, and AI-generated location insights.",
+    "User confirms. System produces a personalised travel video, not a static image."
+  ]}
+/>
+
+<SectionEyebrow>The Map</SectionEyebrow>
+
+## Not Google Maps. Something older.
+
+The map was the hardest design problem in the system. It needed to feel exploratory, not utilitarian. Directional, not navigational. Something between a game world and a real place.
+
+The reference was Age of Empires: the sense of geography as territory. Mountains you could feel. Lakes that anchored the layout. Landmarks that gave the space meaning. But fully AI-generated, and built with a custom visual language that sits closer to editorial than cartographic.
+
+<MediaBlock
+  src="https://youtu.be/BkASqv6n9vo"
+  alt="AI-generated 3D map for Travel Moments"
+  caption="The 3D AI map. Geography rendered as experience, not data."
+/>
+
+Geography creates constraints. A destination like Iceland is relatively tractable: it's an island, the shape holds. A destination like Italy stretches across a long peninsula with multiple distinct regions, competing focal points, and dense cultural geography. The map had to adapt its layout to each destination while preserving the same visual grammar and maintaining readability across all of them.
+
+This was a generation problem as much as a design problem.
+
+<SectionEyebrow>The Output</SectionEyebrow>
+
+## The final artifact is a video. That was not the obvious choice.
+
+Most AI generation tools produce images. An image at the end of a multi-step experience on a television screen would have felt like a printout. The medium was wrong.
+
+Video is the native format of television. It moves. It creates a sense of being there. The final output had to match the emotional register of the platform.
+
+<Pullquote>Full video generation end-to-end costs too much to run at scale. The real product challenge was system design, not generation quality.</Pullquote>
+
+The solution was a hybrid: pre-generated base travel videos paired with AI-generated user insertions. The user appears inside the destination. The video feels personalised. The system stays tractable.
+
+This is the design constraint that shaped the entire architecture. Generation quality is not the bottleneck at this stage. Cost is. Smart system design creates the impression of end-to-end generation at a fraction of the compute.
+
+The current system generates output for a single user. The experience is designed to invite shared interest around that output, but multi-user identity and profile-based generation is a direction we are actively exploring. Generating a moment for a couple or a family, each appearing inside the same destination, is the logical next step.
+
+<MediaBlock
+  src="https://youtu.be/Mvp2WyUzAuQ"
+  alt="Final Travel Moments video output"
+  caption="The final output. User inserted into a destination, rendered as video."
+/>
+
+<SectionEyebrow>Key Decisions</SectionEyebrow>
+
+## What we chose, and why.
+
+<DecisionCards decisions={[
+  {
+    title: "Three Vibes, Not Ten",
+    body: "The original scope included many vibe options. Testing showed more options produced more stalls. We cut to three: Adventure, Relaxation, Discovery. Fewer choices, faster entry, better completion rate."
+  },
+  {
+    title: "Map Before Generation",
+    body: "We could have gone straight from vibe selection to video output. We didn't. The map is the engagement layer. It creates investment before generation begins. Users who explore the map are more likely to complete the flow."
+  },
+  {
+    title: "Video Over Image",
+    body: "A static image as the final output would have broken the experience. TV is a motion medium. The final artifact had to move."
+  },
+  {
+    title: "Hybrid Generation",
+    body: "Full end-to-end generation was not viable at scale. Hybrid production with AI-generated user insertions delivered the same perceived quality at a fraction of the compute cost."
+  },
+  {
+    title: "Optional Exploration",
+    body: "Early builds made map exploration mandatory before generation. We removed the gate. Users who want to explore can. Users who want to generate immediately can. Removing friction increased completions without sacrificing depth for users who wanted it."
+  }
+]} />
+
+<SectionEyebrow>What Didn't Work</SectionEyebrow>
+
+## Three problems that are still honest.
+
+<FailureList items={[
+  {
+    title: "Map Layout at Scale",
+    body: "The AI-generated map worked well for geographically compact destinations. Complex destinations with irregular shapes or high geographic density created layout failures. Readability broke. Hierarchy disappeared. This is still a generation constraint, not a solved problem."
+  },
+  {
+    title: "Exploration vs Speed",
+    body: "Some users wanted to generate immediately. Others wanted to explore for minutes. Designing a single flow that served both states without alienating either group was harder than anticipated. The optional exploration model was the right call, but the transition between states still feels ambiguous."
+  },
+  {
+    title: "Narrative Complexity",
+    body: "Travel is not a single emotion. A couple planning a honeymoon and a family planning a summer trip bring different mental models to the same screen. The vibe system flattened that complexity. It reduced friction at the cost of depth. That trade-off is still open."
+  }
+]} />
+
+<SectionEyebrow>What Changed</SectionEyebrow>
+
+## The version we shipped was not the version we designed.
+
+The original design was exploration-heavy. The map was the centerpiece. Users were expected to spend time in it before generating anything. The experience was rich, deliberate, and slow.
+
+Feedback was direct: people wanted to generate first. The map was interesting. But it wasn't the destination. The output was.
+
+<ReframeList items={[
+  ["Exploration-led", "Generation-led"],
+  ["Mandatory depth", "Optional depth"],
+  ["Map as gateway", "Map as reward"]
+]} />
+
+We moved generation earlier in the flow. The map became something to return to, not something to clear. Completion rates improved. The experience felt lighter. Nothing was removed. The order changed.
+
+<SectionEyebrow>My Role</SectionEyebrow>
+
+## I led the product and experience design from concept to shipped.
+
+- Defined the category pivot toward travel as a more naturally engaging category for the TV surface
+- Owned the system architecture: ambient entry, vibe selection, map exploration, generation pipeline
+- Shaped the map design language: reference points, generation constraints, geographic adaptation rules
+- Worked directly with AI engineering on the hybrid video generation model
+- Drove the iteration from exploration-led to generation-led based on usability feedback
+
+<SectionEyebrow>Impact</SectionEyebrow>
+
+<ProtectedSection>
+
+<StatGrid blocks={[
+  {
+    title: "Engagement",
+    stats: [
+      { value: "+55%", label: "Engagement lift via Moments" },
+      { value: "3.2x", label: "Session depth vs standard content" }
+    ]
+  },
+  {
+    title: "Completion",
+    stats: [
+      { value: "61%", label: "Users who entered the map explored it" },
+      { value: "+28%", label: "Completion rate after removing mandatory exploration" }
+    ]
+  }
+]} />
+
+</ProtectedSection>
+
+<ClosingStatement lines={[
+  "Travel works on TV because it invites curiosity without requiring everyone to act.",
+  "The output is personal. The interest around it is not.",
+  "Not a product to buy. A place to imagine.",
+  "That is what AI on TV can be when it stops trying to sell something."
+]} />

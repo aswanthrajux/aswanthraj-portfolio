@@ -1,0 +1,83 @@
+---
+title: "FolderWall: Driving App Discovery Through Smart Organisation"
+excerpt: "A new paradigm for how users relate to their installed apps, through contextual grouping, intelligent recommendations, and zero manual curation."
+date: "2022-10-01"
+tag: "Product Innovation"
+readTime: "9 min read"
+status: "published"
+---
+
+import { ProtectedSection } from '@/components/ui/ProtectedSection'
+
+## The Challenge
+
+The average Android user has 80 apps installed but regularly uses fewer than 10. The rest sit in folders, forgotten, or are discovered only when the user has a specific need and remembers the app exists.
+
+This isn't a user problem. It's an **information architecture problem.** Apps are organised by how they were installed, not by how they're used. Folders are manual, static, and personal. They don't adapt, learn, or recommend.
+
+FolderWall was our answer: an AI-powered app organisation and discovery system that automatically groups apps into contextual collections and surfaces them at the right moment.
+
+## My Approach
+
+I joined the FolderWall project when it was still called "Smart Folders" and had a narrow scope: just auto-create folders based on app category.
+
+My first contribution was to question the frame. **Folders aren't the insight. Context is.** The useful question isn't "what category is this app?" but "when would you want to see this app?"
+
+This led to the core design principle: **FolderWall organises by situation, not by category.**
+
+## Design Process
+
+### Research: How People Actually Use Apps
+
+We ran a three-week study with 60 participants using passive app-usage tracking (with explicit consent). The data was revealing:
+
+- Apps cluster into 6–8 "situations" for most users: morning routine, commute, lunch break, work, evening wind-down, weekend leisure
+- 72% of app launches are habitual: the same apps at the same times
+- 28% of launches are exploratory, trying to remember "that app I haven't used in a while"
+
+FolderWall had to serve both: support the habitual 72% with speed and familiarity, and unlock the exploratory 28% with smart recommendations.
+
+### Defining the "Wall" Metaphor
+
+The original "Smart Folders" metaphor was too conservative. Folders imply hierarchy and manual organisation. We wanted something more fluid.
+
+After three rounds of conceptual development, we landed on the **Wall** metaphor: a living display surface that reorganises itself based on context. Like a physical notice board that someone has helpfully curated for you, pinned with the things you need right now.
+
+This metaphor guided every design decision: cards instead of list items, spatial arrangement instead of alphabetical lists, ambient updates instead of jarring reorganisations.
+
+### Prototyping the Recommendation Engine UX
+
+The hardest design challenge was communicating AI-driven recommendations without being creepy. "We know you're near a restaurant right now" feels invasive. "Here are apps for where you are" feels helpful.
+
+The difference is entirely in the design language. We developed three principles:
+
+1. **Show, don't tell.** Surface the app. Don't explain why unless asked.
+2. **Offer, don't impose.** Recommendations are suggestions. The user's own organisation always takes precedence.
+3. **Control is always visible.** A single tap on any app reveals a "Why is this here?" explanation.
+
+### Solution
+
+FolderWall ships as a home screen replacement layer (accessible from the lock screen via Hub). The visual structure has three zones:
+
+**Primary Zone: Recent & Predicted.** The apps you're most likely to use right now, based on time, location, and usage history. Displayed as large, tappable cards.
+
+**Secondary Zone: Situational Groups.** Automatically created collections like "Morning Routine," "Work," "Weekend," or custom user-created groups. Each group has 4–12 apps and updates dynamically.
+
+**Discovery Zone:** Apps you haven't opened in 30+ days, surfaced with a "Rediscover" prompt. Often the highest-value recommendation layer for users who've lost track of what they have.
+
+<ProtectedSection>
+
+## Impact
+
+- **App engagement breadth:** FolderWall users open 2.3× more unique apps per week than users on standard Android launchers
+- **Discovery rate:** 41% of users opened at least one "rediscovered" app per week
+- **Retention:** FolderWall users have 28% higher 90-day device retention (users are less likely to switch phones when their experience feels personalised)
+- **NPS:** 78, our highest product NPS score across the Glance suite
+
+</ProtectedSection>
+
+## What I Learned
+
+**The hardest UX is designing behaviour change.** FolderWall asked users to give up manual folder management, a deeply habitual behaviour. We couldn't win with features alone. We had to demonstrate value on day one, then earn the deeper behaviour change over weeks.
+
+**AI recommendations need a UX contract.** We defined a "recommendation contract" with users early: we will only suggest apps based on your own usage patterns. We will never use third-party data. We will always let you override. This contract was never explicitly shown to users, but it guided every micro-decision in the design.

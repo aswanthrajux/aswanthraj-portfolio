@@ -1,0 +1,85 @@
+---
+title: "How to Think Before You Build with AI"
+excerpt: "Most people use AI. Few know how to design with it. A framework for moving from AI user to AI builder."
+date: "2026-04-10"
+tag: "AI / Framework"
+readTime: "5 min read"
+status: "published"
+---
+
+Everyone in the room was using AI. Nobody in the room knew how to build with it.
+
+That is the gap. Not tools. Thinking. Most people treat AI as an accelerator: faster copy, quicker research synthesis, automated handoffs. That is useful. It is also the shallow end. Building AI-native products requires something different. It requires designing the system before writing the first prompt.
+
+<SectionEyebrow>The Distinction</SectionEyebrow>
+
+## What AI-Native Actually Means
+
+There is a distinction worth making explicit. AI-assisted means AI helps you work faster. AI-native means AI is the product. Remove the model and there is nothing left. The model is not a feature bolted on. It is the core experience.
+
+Designing for this context is fundamentally different from designing screens around a feature. You are not wireframing a UI. You are designing a system: what goes in, what comes out, how the model behaves at the boundaries, and what happens when it does not behave as expected. The interface is the system, not the pixels.
+
+<SectionEyebrow>Framework</SectionEyebrow>
+
+## The AI Product Thinking Framework
+
+I developed this framework while building UI Forge, a Figma plugin that converts UI screenshots into editable Figma frames using a local vision model. The framework has three phases. None of them involve writing code until Phase 3.
+
+![The AI Product Thinking Framework: three phases from thinking to planning to building](/images/insights/ai-framework.webp)
+
+**Phase 1: Think (no code).** Before touching any tool, you need to answer four questions: What is the problem? What does good output actually look like? What architecture makes sense given your constraints? What is the hardest assumption in this system, and can it be validated cheaply?
+
+For UI Forge, the hardest assumption was whether a local vision model could reliably interpret UI structure from a screenshot. I tested that in isolation before building anything else. If the model could not do it, none of the rest mattered. Validate the riskiest part first. Always.
+
+Design system thinking belongs in this phase too. "UI generation" is not image generation. It is structured output: components, hierarchy, spacing, layout direction. Defining this precisely before building saved weeks of rework.
+
+**Phase 2: Define the output contract.** This is the most skipped phase and the most critical. What does your system return? What format? What constraints apply? If you cannot describe the output precisely, you cannot build reliably.
+
+For UI Forge, the output contract was a strict JSON schema: canvas dimensions, element types, colour values, font properties, layout rules. The model had to hit that contract on every call. The contract was defined before the prompt was written, not after. Most people do it backwards. They build the pipeline, discover the output is inconsistent, then try to fix it by adjusting prompts. The fix is always the same: go back to Phase 2.
+
+**Phase 3: Build the pipeline.** Now you write code. Prompt to model to output. Build the translation layer that converts model output into your product's format. Then iterate: refine the prompt, fix structural issues, improve fidelity. This loop is the actual work.
+
+Know when to scale. I ran UI Forge locally on Ollama with Qwen2.5-VL because local models are free and fast for iteration. The model was the bottleneck only after the pipeline was stable. That is when you move to paid APIs, not before. Moving to paid models too early means paying to debug problems that belong in Phase 2.
+
+<SectionEyebrow>In Practice</SectionEyebrow>
+
+## Tested with 40 Students
+
+I recently ran this framework in a session at Image Creative Education with 40 students from design and multimedia backgrounds. They were fluent AI users: ChatGPT, Midjourney, basic automations. But they had no mental model for building AI-driven systems. They knew how to prompt. They did not know how to design.
+
+<MediaBlock
+  src="https://youtube.com/shorts/QiBwPwEONyc"
+  alt="Session at Image Creative Education on designing AI-native products"
+  caption="Session at Image Creative Education. 40 students. One framework."
+  portrait
+/>
+
+![Students at Image Creative Education after the session on designing AI-native products](/images/insights/ai-session-selfie.webp)
+
+I gave them one exercise: pick a problem, then answer six questions before opening any tool.
+
+What is the input? What is the output? What model would you use? What is the frontend? What is the backend? What is your first prompt?
+
+The shift was visible within the session. Students who came in thinking "I want to build a travel itinerary app using AI" left thinking: input is location, budget, and number of days; output is a structured plan; model is GPT-4o; frontend is a simple web form; backend handles the API call; the first prompt defines the output schema, not the task. That reframe is the difference between an idea and a system.
+
+<SectionEyebrow>The Bottleneck</SectionEyebrow>
+
+## The Bottleneck Is Never the Model
+
+Every conversation about AI product quality eventually lands on the model. It is not smart enough. It hallucinates. It is too slow. Sometimes this is true. Usually it is a Phase 2 problem wearing a model problem's clothing.
+
+No output contract means the model has no definition of success. It produces what it produces. Some outputs are good. Most are inconsistent. Teams spend weeks iterating on prompts around a problem they should have designed away before writing the first line.
+
+Define the output first. Build the pipeline second. Iterate until the pipeline is reliable. Scale the model when the pipeline is the bottleneck and not before.
+
+<SectionEyebrow>The Shift</SectionEyebrow>
+
+## From User to Builder
+
+The shift from AI user to AI builder is not about learning new tools. It is a thinking shift. Once you see every AI idea as a system, with a defined input, a precise output contract, and a reliable pipeline, you cannot unsee it. The framework does not make the work easier. It makes the work clearer.
+
+Start with one system. Keep it small. Define the output before you write the prompt. Build the pipeline before you scale the model. Iterate until it works reliably. That sequence applies whether you are building a Figma plugin for yourself or a production AI product with millions of users.
+
+The gap between using AI and building with AI is smaller than most people think. It is a single question, asked honestly: what exactly should this system produce?
+
+If you can design the system, AI will do the rest.

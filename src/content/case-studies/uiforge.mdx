@@ -1,0 +1,207 @@
+---
+title: "From Pixels to Systems: Building UIForge"
+excerpt: "Can AI convert a screenshot into structured, editable UI? I built a Figma plugin to find out. The answer was more clarifying than the tool itself."
+date: "2026-03-22"
+tag: "AI · Lab Experiment"
+readTime: "5 min read"
+status: "published"
+---
+
+<MediaBlock
+  src="https://youtu.be/uR6EH0WLM44"
+  alt="UIForge demo: screenshot to editable Figma layers"
+  caption="UIForge in action. A UI screenshot goes in. Editable Figma layers come out."
+/>
+
+<SectionEyebrow>Opening</SectionEyebrow>
+
+## The question was deceptively simple.
+
+Take a screenshot. Return editable Figma layers.
+
+Not a concept. Not a prototype. A real pipeline: image in, structured UI out.
+
+UIForge was built to test whether that was possible with the models available today. Not to ship a product. To understand where the gap actually lives between visual generation and structural thinking.
+
+That gap turned out to be the entire experiment.
+
+<SectionEyebrow>Context</SectionEyebrow>
+
+## It started as a Figma plugin. It became a question about AI cognition.
+
+The framing was: AI can generate visual output. It can describe what's on screen. Can it reconstruct the structure behind what it sees?
+
+The difference matters. A description is passive. A reconstruction requires understanding: what's a component, what's a container, what's a group, what's whitespace doing.
+
+UIForge was the tool built to test that distinction. Not with toy inputs. With real product screens, mobile interfaces, and dense UI.
+
+<SectionEyebrow>Experiment</SectionEyebrow>
+
+## Input: any UI screenshot. Output: editable layers. That was the goal.
+
+The experiment had three sub-tasks, each increasingly hard:
+
+**Detect text.** Find every visible text element, extract the string, position it correctly in the canvas.
+
+**Infer layout.** Identify groupings: cards, nav bars, lists, modals. Reconstruct the hierarchy that would explain the visual output.
+
+**Reconstruct components.** Go beyond groups. Identify repeated patterns. Build reusable elements, not just one-off frames.
+
+Each step compounded the previous one. A text detection error produced a layout error. A layout error made component inference impossible.
+
+<SectionEyebrow>System and Stack</SectionEyebrow>
+
+## The pipeline had three versions. Each one exposed a different class of failure.
+
+<MediaBlock
+  src="/images/case-studies/uiforge-technical-approach.webp"
+  alt="UIForge technical approach: image input to structured Figma output"
+  caption="The technical approach. Image in, structured output contract out, Figma layers mapped."
+/>
+
+**V1: Local models.**
+
+The starting point was local inference. Lower cost, full control, no rate limits. In practice: inconsistent structure, poor spatial reasoning, and outputs that looked plausible at first glance but broke immediately on inspection.
+
+Local models could approximate. They couldn't reason.
+
+**V2: API-based models.**
+
+Moving to API models improved output quality significantly. Text extraction improved. Grouping became more coherent. The generation quality was no longer the bottleneck.
+
+The bottleneck was structure. Higher quality output of a fundamentally flawed interpretation.
+
+**V3: Structured prompting.**
+
+The shift that produced the clearest signal: constrained inputs and structured output formats. Instead of asking the model to "reconstruct this UI," I started defining what structure meant: bounding boxes, nesting depth, element type, spacing rules.
+
+This didn't fix the problem. But it made the failure legible.
+
+<SystemLoop
+  steps={["Image Input", "Model Inference", "Structured Output", "Layer Mapping"]}
+  descriptions={[
+    "Raw UI screenshot or product screen. No preprocessing, no annotation. The model sees what the model sees.",
+    "Visual analysis: text detection, region identification, spatial grouping. The model infers structure from pixel patterns.",
+    "Structured JSON: element types, bounding coordinates, nesting, text content. The output format determines what can be built.",
+    "JSON parsed into Figma API calls. Each element becomes a frame, text node, or group. Auto-layout attempted where grouping logic holds."
+  ]}
+/>
+
+<MediaBlock
+  src="/images/case-studies/uiforge-tech-stack.webp"
+  alt="UIForge tech stack across V1, V2, and V3"
+  caption="Stack evolution across three versions. Local to API to structured prompting."
+/>
+
+<SectionEyebrow>What Worked</SectionEyebrow>
+
+## Three things held up under real inputs.
+
+**Text extraction.** OCR-level accuracy on clean interfaces. The model found text reliably, extracted strings correctly, and placed them with reasonable positional fidelity. This part worked.
+
+**Basic grouping.** Visible containment logic translated reasonably well. Cards were identified as cards. Navigation bars held together. The grouping logic was shallow but mostly correct.
+
+**Visual similarity.** The model was good at identifying repeated patterns. It could flag when two elements looked the same. Whether that translated to a reusable component was a separate problem.
+
+<SectionEyebrow>What Failed</SectionEyebrow>
+
+## Five problems. None of them edge cases.
+
+<FailureList items={[
+  {
+    title: "Spacing inconsistency",
+    body: "Padding and gap values were approximated, not extracted. Numbers were plausible but wrong. A 16px gap became 14px. A card padding of 24px became 20px. Subtle enough to look right, precise enough to break when combined into a real layout."
+  },
+  {
+    title: "Hierarchy breakdown",
+    body: "Nesting logic failed on anything beyond two levels deep. Elements that should have been children became siblings. The model understood what was on screen. It didn't understand what was inside what."
+  },
+  {
+    title: "Auto layout failure",
+    body: "Figma's auto layout requires knowing the axis, direction, spacing, and alignment intent. The model could guess. It could not know. The outputs required manual correction on every non-trivial component."
+  },
+  {
+    title: "No reusable components",
+    body: "Visual similarity detection never translated to component generation. The model could identify two buttons that looked the same. It could not extract a button component that both instances could reference. Each instance became its own flat group."
+  },
+  {
+    title: "No system logic",
+    body: "Design systems have rules: tokens, states, relationships between components. Images carry none of this. The output was always a snapshot. It had no awareness of what the elements were in a system sense. Just what they looked like in one screen."
+  }
+]} />
+
+<SectionEyebrow>Key Insight</SectionEyebrow>
+
+## AI reconstructs pixels. It doesn't understand structure.
+
+This is the core finding. Worth stating clearly.
+
+An image is a rendered output. It shows what a UI looks like after all the structural decisions have been compiled away. The layout rules, spacing tokens, component hierarchy, and state logic are no longer in the image. They were upstream.
+
+A model looking at a screenshot is reconstructing from the output, not reading the source. It's like inferring the original code from a compiled binary. Possible in limited cases. Fundamentally unreliable at scale.
+
+<Pullquote>AI can describe what you built. It cannot infer why you built it that way.</Pullquote>
+
+This matters because "better prompting" doesn't solve it. The information isn't there to be extracted. The model is inferring, not reading. Inference is probabilistic. Structure is deterministic. Those two things can't fully meet.
+
+<SectionEyebrow>Why This Happens</SectionEyebrow>
+
+## The problem isn't model quality. It's information loss.
+
+Layout rules are implicit. An image shows that two elements are 16px apart. It doesn't say whether that's a design token, a magic number, or inherited from a container's padding.
+
+Images don't contain structure. They contain rendered representations of structure. The model sees the rendering. The structure is gone.
+
+Models infer, not understand. Pattern matching on pixels can approximate intent in simple cases. It breaks systematically when the UI is layered, stateful, or component-driven.
+
+Higher quality models push the approximation further. They don't change the underlying problem.
+
+<MediaBlock
+  src="/images/case-studies/uiforge-token-cost.webp"
+  alt="Token and cost calculation for UIForge model iterations"
+  caption="Token usage and cost per iteration. Moving to API models before the pipeline is stable is expensive for the wrong reasons."
+/>
+
+<SectionEyebrow>What Changed</SectionEyebrow>
+
+## I stopped trying to generate better UI. I started thinking about how to constrain generation.
+
+The initial instinct was: better models, better prompts, better output.
+
+The insight that changed the direction: generation quality isn't the variable. Input structure is.
+
+<ReframeList items={[
+  ["Better prompts", "Structured inputs"],
+  ["Model quality as the lever", "Input constraints as the lever"],
+  ["Generate, then fix", "Define structure, then generate"],
+  ["Output-first thinking", "System-first thinking"]
+]} />
+
+<MediaBlock
+  src="/images/case-studies/uiforge-pipeline-comparison.webp"
+  alt="Old vs new pipeline: unconstrained generation vs structured input pipeline"
+  caption="Before and after. Raw image into open prompt vs constrained input into a defined output contract."
+/>
+
+The most useful shift: treating generation as the last step, not the first. The work that matters happens before the model sees anything. What format is the input in? What constraints define valid output? What structural assumptions are baked into the prompt?
+
+UIForge inverted this. Raw images, open-ended prompts, unconstrained output format. That's the wrong order.
+
+<SectionEyebrow>Next Direction</SectionEyebrow>
+
+## Three things worth building toward.
+
+**Structured inputs.** Annotated screenshots with explicit layer hints, component labels, or partial metadata. Not raw pixels. Pre-processed context.
+
+**Layout constraints.** Output schemas that encode design system rules: token names, grid definitions, valid spacing values. The model fills in within a defined space.
+
+**Hybrid pipelines.** Combine deterministic extraction (bounding boxes, color sampling, text) with generative inference only where structure is genuinely ambiguous. Keep the model out of decisions that don't require inference.
+
+The goal isn't to make AI understand design. It's to build systems where AI contributes where it's strong, and structured rules handle what AI consistently gets wrong.
+
+<ClosingStatement lines={[
+  "UIForge didn't solve the problem it set out to solve.",
+  "It made the problem legible.",
+  "AI generates visuals. It doesn't understand systems.",
+  "The work is in building the structure that guides generation, not in improving the generation itself."
+]} />

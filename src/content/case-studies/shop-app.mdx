@@ -1,0 +1,338 @@
+---
+title: "Shop What You Watch"
+excerpt: "When Samsung opened the door to a pre-installed TV app, the question wasn't how to design it. It was what it should be."
+date: "2026-01-20"
+tag: "AI · 0→1 Product"
+coverImage: "/images/case-studies/shop-app-cover.webp"
+readTime: "11 min read"
+status: "published"
+---
+
+import { ProtectedSection } from '@/components/ui/ProtectedSection'
+
+<SectionEyebrow>The Situation</SectionEyebrow>
+
+## Samsung said yes. Nobody knew what to do with it.
+
+The deal was straightforward on paper. Samsung would pre-install a Glance app on their smart TVs. Not a screensaver. A full, first-party TV app with direct placement in the home experience.
+
+That's unusual. Most OEM agreements lock partners into specific surfaces with fixed behaviors. This one didn't. Samsung handed us a blank canvas on the most passive screen in the home.
+
+We had no product definition. No existing behavior to build on. No user expectation to meet. Just an audience, a remote, and an open question: what should this be?
+
+<SectionEyebrow>The Direction</SectionEyebrow>
+
+## We explored everything. Then we came back to what we are.
+
+The first round of thinking was wide. Games. Ambient extensions. A second-screen companion. TV-native utility apps.
+
+Every direction ran into the same wall: we had no platform advantage in any of them. We'd be building from scratch against players who'd been doing it for years.
+
+The honest question was: what does Glance actually know how to do?
+
+Commerce. Specifically: surfacing the right product to the right person at the right moment.
+
+That wasn't a fallback. It was a decision. One that eliminated everything else and made the real problem visible.
+
+<ReframeList items={[
+  ["TV as entertainment surface", "TV as commerce surface"],
+  ["Build what Samsung expects", "Build what Glance does best"],
+  ["Feature expansion", "Strategic focus"]
+]} />
+
+<SectionEyebrow>The Problem</SectionEyebrow>
+
+## People don't shop on TV. That's not a gap in the market. It's a behavior problem.
+
+There's no established pattern for TV commerce. No user expectation. No muscle memory. Nobody opens a TV app thinking: I should buy something.
+
+The screen is passive. The remote is slow. The attention is often shared. And intent doesn't exist at the moment the screen turns on.
+
+This is fundamentally different from mobile commerce, where the device is personal, interaction is fast, and shopping is already habitual.
+
+<Pullquote>A UI can't solve a behavior problem. You have to design the behavior first.</Pullquote>
+
+We weren't designing a shopping app. We were designing a reason to shop.
+
+<ReframeList items={[
+  ["UI problem", "Behavior problem"],
+  ["Catalog-first", "Intent-first"],
+  ["Browse and find", "Guided and act"]
+]} />
+
+<SectionEyebrow>The Strategic Shift</SectionEyebrow>
+
+## Catalog-based shopping was the wrong answer.
+
+The obvious move: build a product catalog. Categories. Filters. Search. A digital shelf.
+
+That model assumes the user arrives with intent. On a TV surface, they don't. Browsing requires effort. A remote is not a cursor. And attention on a TV is always a negotiation between whoever's in the room.
+
+Catalog-based shopping collapses the moment you remove intent.
+
+So we didn't build a catalog. We built an agent.
+
+The difference isn't cosmetic. A catalog waits for the user to navigate. An agent starts a conversation. One puts friction at the beginning. The other removes it entirely.
+
+
+<SectionEyebrow>The System</SectionEyebrow>
+
+## Not an interface. A guide.
+
+The shopping agent isn't a search bar with better results. It's a system that understands what the user wants, asks when it doesn't, and gets progressively better at not needing to ask.
+
+<SystemLoop
+  steps={["Intent", "Understand", "Recommend", "Explore", "Try On", "Act"]}
+  descriptions={[
+    "User expresses a direction: 'I want a jacket.' Not a search query. A conversation starter.",
+    "Agent asks clarifying questions if needed. If preference history exists, it skips them. Memory reduces friction over time.",
+    "Agent surfaces a visual product grid. Not a catalog dump. Contextual, curated, and ranked by relevance to the expressed intent.",
+    "User redirects via prompts: 'Show me something warmer' or 'Different colour.' No menu required. The agent responds.",
+    "User scans a QR code, bridges to mobile, takes a selfie. AI generates an image of them wearing the product on the TV screen.",
+    "Buy, save, or continue exploring. The agent holds the session state. Nothing resets between steps."
+  ]}
+/>
+
+<MediaBlock
+  src="https://youtu.be/6FOdoG9tvuY"
+  alt="Shopping agent experience: intent to recommendation to try-on"
+  caption="The full agent loop. From a single sentence to a product on your body."
+/>
+
+<SectionEyebrow>The Interaction Model</SectionEyebrow>
+
+## Two layers. No more.
+
+TV interaction has a hard constraint: the remote. Five directional buttons and a select. That's the vocabulary.
+
+We designed around it rather than against it.
+
+The system has two interaction layers. Primary: the agent responds, renders, and leads. Secondary: prompt-based direction changes. The user doesn't navigate to options. They say where they want to go.
+
+Voice is available as a fallback for users who prefer it. Not the primary input. Most TV users won't speak to their TV. The system works for both without forcing either.
+
+Keeping it to two layers was a choice, not a limitation. Every additional layer adds a decision point. On a passive screen with a slow input device, decision points are the enemy of completion.
+
+<MediaBlock
+  src="/images/case-studies/shop-app-two-layers.webp"
+  alt="Two-layer interaction model: agent response and prompt redirection chips"
+  caption="Two layers. The agent leads. Prompts redirect. Nothing else."
+/>
+
+<SectionEyebrow>Agent Memory</SectionEyebrow>
+
+## The agent gets better the more you use it.
+
+The first session requires context-gathering. The second one doesn't. The agent retains style preferences, rejected categories, price sensitivities, and brand affinities across sessions.
+
+This isn't just personalisation. It's the mechanism that makes TV commerce viable long-term. A catalog stays static. An agent evolves.
+
+The asymptote is a system that knows what you want before you say it. We're not there yet. But every session moves the system closer.
+
+<SectionEyebrow>The Landing Page Problem</SectionEyebrow>
+
+## An agent is useless if nobody opens the app.
+
+This was the harder problem. Not the commerce experience. The entry point.
+
+Why would someone open a shopping app on their TV? They opened the TV to watch something. There's no natural bridge between "I want to watch" and "I want to shop."
+
+The standard answer: personalisation. Show people what they like. The problem: we had no personal data at launch. Privacy constraints, cold start, zero behavioral history.
+
+So we asked a different question.
+
+<Pullquote>People don't come to TV to shop. They come to watch. What if shopping started from watching?</Pullquote>
+
+<SectionEyebrow>The Landing Page Strategy</SectionEyebrow>
+
+## Shop what you watch.
+
+The entry point isn't "here are products you might like." It's "here are products from what's trending."
+
+We mapped product associations to trending shows and movies. The content people were already watching became the discovery surface. A crime drama surfaces watches and outerwear. A reality cooking show surfaces kitchen gear. A travel documentary surfaces luggage and accessories.
+
+None of this required personal data. Trending content is public signal. Product association is editorial intelligence. The system combines both.
+
+The result: a landing experience that feels relevant before the agent knows anything about you. It creates immediate context without relying on behavioral tracking. And it solves the cold start problem without asking the user to do any work.
+
+<ReframeList items={[
+  ["Personal data", "Trending content"],
+  ["Behavioral tracking", "Editorial mapping"],
+  ["Cold start barrier", "Contextual entry point"]
+]} />
+
+<MediaBlock
+  src="/images/case-studies/shop-app-landing.webp"
+  alt="Landing page: trending shows and movies mapped to shoppable products"
+  caption="Trending content as the entry point. No personal data required."
+/>
+
+<SectionEyebrow>Distribution Strategy</SectionEyebrow>
+
+## Vision AI as a channel, not a feature.
+
+The app solves the experience. But the app still has to be opened. That's the distribution problem.
+
+Samsung's Vision AI layer changes the equation. It surfaces contextual prompts based on what users are actively watching. Not a notification. Not an interruption. A prompt tied to content the user already cares about.
+
+We proposed using Vision AI as the primary entry channel for the shopping app. Not through banner placement or home screen promotion. Through content context.
+
+**Strategy 1: Watch and interact.**
+
+The user is watching Top Gun. Vision AI surfaces prompts: outfits from the movie, related items. The user taps. The agent starts. No app switch. No context loss.
+
+Commerce layers on top of viewing. The user can browse, interact with the agent, and explore products without leaving what they were watching. The TV does two things at once. Most importantly: the user didn't decide to shop. The moment created the decision.
+
+<MediaBlock
+  src="https://youtu.be/1qS89EJvL18"
+  alt="Vision AI prompt triggers agent interaction while content continues playing"
+  caption="Watch and interact. The agent activates from a content prompt. Viewing continues."
+/>
+
+**Strategy 2: Contextual app entry.**
+
+Some users want to go deeper. When they tap the Vision AI prompt, they reach a dedicated entry point for Glance. From there, if they choose to open the app, the context travels with them.
+
+The app opens preloaded. Not with a generic catalog. With products mapped to what they were watching. Top Gun surfaces aviation jackets, sunglasses. The entry point carries intent into the app. The user doesn't have to rebuild the context they already had.
+
+This is the difference between an app that receives traffic and an app that receives ready-to-act users.
+
+<MediaBlock
+  src="https://youtu.be/FybRUVMeyuQ"
+  alt="Vision AI entry into app with context-loaded products"
+  caption="Context-first entry. The app opens where the intent already is."
+/>
+
+<ReframeList items={[
+  ["App open rate problem", "Distribution through content context"],
+  ["Generic app entry", "Intent-loaded app entry"],
+  ["Platform feature", "Acquisition channel"]
+]} />
+
+<SectionEyebrow>Key Decisions</SectionEyebrow>
+
+## What we chose, and why.
+
+<DecisionCards decisions={[
+  {
+    title: "Agent-first, not catalog-first",
+    body: "TV cannot handle deep browsing. A catalog puts all the navigation work on the user. An agent leads the experience. That's the right match for a passive screen with a five-button remote."
+  },
+  {
+    title: "Two interaction layers only",
+    body: "Every added layer on a TV surface creates a new failure point. We capped at two: agent response and prompt-based redirection. Simplicity isn't a compromise here. It's the product."
+  },
+  {
+    title: "Mobile as the identity layer",
+    body: "TV is output. Mobile is input. The QR-to-selfie bridge lets the TV surface a try-on experience without requiring identity work on a ten-foot screen with a five-button remote."
+  },
+  {
+    title: "Try-on before purchase",
+    body: "TV commerce has a trust gap. Users have never bought on this surface before. Virtual try-on closes part of that gap by making the product personal before the transaction begins."
+  },
+  {
+    title: "Contextual landing via trending content",
+    body: "We had no personal data at launch. Trending shows gave us relevance without behavioral history. The entry point felt intelligent from day one without requiring any user data."
+  },
+  {
+    title: "Memory as the compounding asset",
+    body: "The first session is the hardest. Every session after is less friction. Agent memory is what makes this experience worth returning to. Without it, it's just a better catalog."
+  },
+  {
+    title: "Vision AI as the distribution channel",
+    body: "The app experience was only half the problem. Distribution was the other half. Using Samsung's Vision AI layer as the entry channel meant users arrived with context already set. The platform did the acquisition work. The app closed it."
+  }
+]} />
+
+<SectionEyebrow>Challenges</SectionEyebrow>
+
+## The honest version.
+
+**No behavior exists.** We were designing a behavior from scratch on a platform with no precedent. There's no research to cite. No benchmark to beat. Users didn't know what to expect because nothing like this existed before.
+
+**Remote input is brutal.** Two interaction layers is the right answer. Getting there required removing a lot of things the team wanted to keep. Every cut was a negotiation between product ambition and interaction reality.
+
+**The trust gap is real.** Users engage with the agent. They explore. They try on. They hesitate at checkout. TV commerce doesn't have the credibility that mobile commerce spent a decade building. That can't be shortcut. It has to be earned.
+
+**QR breaks the session.** The mobile bridge is the right architecture. But any transition to a second device is a friction point. Not every user completes it. The ones who don't lose the try-on experience entirely.
+
+**Agent design is hard.** Deciding what the agent says, when it asks, when it assumes, and how it fails gracefully is a product problem as much as a technical one. The iteration surface is enormous.
+
+<SectionEyebrow>What Worked</SectionEyebrow>
+
+## Three things that moved.
+
+**The agent reduced friction at entry.** Users didn't have to navigate. They could start with a word and see something relevant. That's a meaningful shift on a surface where navigation is the primary barrier.
+
+**Try-on built confidence.** Users who completed the QR bridge were meaningfully more likely to continue toward purchase. Seeing yourself in a product changes the decision calculus. The abstraction collapses when it's your face.
+
+<MediaBlock
+  src="https://youtu.be/Hux29p2mn8Q"
+  alt="Shop app keynote: virtual try-on and full purchase flow"
+  caption="The try-on moment. The product becomes personal before the purchase decision."
+/>
+
+**Contextual commerce drove engagement.** The trending content landing page created immediate relevance. Users engaged with content-mapped products even before the agent learned anything about them. The non-personalised entry strategy held.
+
+<SectionEyebrow>What Didn't Work</SectionEyebrow>
+
+## Three problems that are still honest.
+
+<FailureList items={[
+  {
+    title: "Purchase completion",
+    body: "Users explored. Users tried on. Users didn't buy. The conversion drop-off at checkout is consistent and significant. The agent creates intent. The commerce handoff doesn't close it. This is the most important unsolved problem in the system."
+  },
+  {
+    title: "The QR dependency",
+    body: "The try-on experience requires a mobile bridge. That's two devices, two steps, and one significant drop-off point. Users who don't complete the bridge get a less compelling experience. The system's strongest moment is behind a friction wall."
+  },
+  {
+    title: "Agent learning lag",
+    body: "The agent gets better over time. But the improvement between session one and session two is not obvious to users. The feedback loop is too slow to feel like magic. Users don't feel the compounding before they disengage."
+  }
+]} />
+
+<SectionEyebrow>My Role</SectionEyebrow>
+
+## I defined the product from a blank page.
+
+When the Samsung deal landed, there was no product direction. That was the starting point.
+
+- Defined the product direction: commerce over games, ambient extensions, or utility apps
+- Made the strategic call to build agent-first, not catalog-first
+- Designed the shopping agent interaction model, including the two-layer constraint
+- Shaped the landing page strategy: trending content as the contextual entry point
+- Proposed Vision AI as a distribution channel: both the watch-and-interact layer and the context-loaded app entry
+- Worked with AI engineering on the try-on pipeline and QR bridge architecture
+- Contributed to GTM positioning for the Samsung relationship
+
+<SectionEyebrow>Impact</SectionEyebrow>
+
+<ProtectedSection>
+
+<StatGrid blocks={[
+  {
+    title: "Engagement",
+    stats: [
+      { value: "TBD", label: "Agent session depth" },
+      { value: "TBD", label: "Try-on completion rate" }
+    ]
+  },
+  {
+    title: "Commerce",
+    stats: [
+      { value: "TBD", label: "Purchase intent lift" },
+      { value: "TBD", label: "Return session rate" }
+    ]
+  }
+]} />
+
+</ProtectedSection>
+
+<ClosingStatement lines={[
+  "The challenge wasn't building a shopping app.",
+  "It was designing a new behavior on a platform that has never asked users to shop.",
+  "Catalogs wait. Agents lead.",
+  "TV commerce doesn't start with a product. It starts with a conversation."
+]} />

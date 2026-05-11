@@ -1,0 +1,85 @@
+---
+title: "Hub & Lockscreen: The Intelligent In-Between"
+excerpt: "Reimagining mobile surfaces like lock-screen and widgets into intelligent spaces that deliver personalised content and boost app engagement."
+date: "2023-06-01"
+tag: "Mobile · Systems Design"
+readTime: "10 min read"
+status: "published"
+---
+
+import { ProtectedSection } from '@/components/ui/ProtectedSection'
+
+## The Challenge
+
+The lock screen is the most-seen surface on any smartphone — accessed 80+ times per day by the average user. Yet for most of Android's history, it's been a dead zone. A clock. A notification. Swipe to unlock.
+
+At Glance, the hypothesis was radical: **what if the lock screen was the most valuable real estate on the device?** Not a barrier to your phone, but a destination in itself.
+
+My brief was to design the Hub & Lockscreen system — a unified experience layer that sits between the user and their phone, delivering contextually relevant content, apps, and recommendations without requiring the user to unlock.
+
+## My Approach
+
+The first thing I did was throw away every lock screen reference I'd ever seen. This wasn't an iteration problem. It was a **paradigm problem.**
+
+I defined the design principle early: **the lock screen should know what you need before you know you need it.** It should be ambient when you're busy, rich when you're curious, and invisible when you want to unlock.
+
+This meant designing three distinct modes:
+1. **Glance mode** — a single full-bleed card visible in 0.5 seconds
+2. **Explore mode** — activated by a swipe up, reveals a curated content feed
+3. **Hub mode** — a persistent grid of AI-recommended apps, accessible without unlocking
+
+## Design Process
+
+### Discovery
+
+I started with a two-week diary study — 22 participants across Mumbai, Bangalore, and Hyderabad. I asked them to screenshot their phone every time they picked it up. Then we looked at the patterns together.
+
+**What we found:** 47% of phone pickups resulted in no action beyond checking the time or a notification. The user had *intent* but not a clear destination. **Hub was designed for exactly this moment.**
+
+### The FolderWall Connection
+
+Hub & Lockscreen didn't live in isolation. It was deeply integrated with FolderWall — our app discovery and organisation system. The apps that surfaced in Hub were powered by FolderWall's recommendation engine, which tracked usage patterns, time of day, location context, and upcoming calendar events.
+
+This systems thinking — designing Hub as a *surface* for FolderWall's intelligence, not as a standalone screen — was the key architectural decision that made the product feel magical.
+
+### Ideation & Prototyping
+
+We ran three rounds of concept testing with 12-week longitudinal study cohorts. Each cohort used a different variant:
+
+- **Variant A:** Content-first (editorial cards, minimal app access)
+- **Variant B:** Apps-first (quick launch grid, content as secondary)
+- **Variant C:** Adaptive (switches modes based on time of day and usage context)
+
+Variant C won — but not by UI metrics. It won because it was the only variant users *talked about*. "My phone knows me" was the verbatim that appeared in 9 of 14 interview transcripts.
+
+### Solution
+
+The final Hub & Lockscreen design has a layered information architecture:
+
+**Immediate layer (0–0.5s):** Time, date, weather. Always visible, always readable.
+
+**Content layer (swipe-up):** A vertically scrollable feed of AI-curated content cards — news, sports, entertainment, personalised to the user's reading history. Cards are full-width, image-forward, readable at arm's length.
+
+**App layer (swipe-right):** A contextual app grid showing 8 AI-recommended apps. The recommendations shift throughout the day — productivity apps in the morning, entertainment in the evening, maps and payments near transit hubs.
+
+**Notification layer (always-on):** Standard Android notifications, styled within the Glance visual system.
+
+<ProtectedSection>
+
+## Impact
+
+- **App downloads:** 23% increase in app downloads attributed to Hub recommendations vs. organic discovery
+- **Lock screen engagement:** 38% of users interact with content on the lock screen without unlocking the phone
+- **Session time:** Users who engage with Hub average 4.2 minutes longer daily active usage vs. non-Hub users
+- **App discovery breadth:** Hub users have 31% more unique apps they use weekly vs. non-Hub users
+- **Revenue:** Hub is now Glance's highest-performing revenue surface, generating 3× the eCPM of traditional ad placements
+
+The product ships on **200 million+ Android devices** across India, Indonesia, and Japan.
+
+</ProtectedSection>
+
+## What I Learned
+
+**Intelligence needs to be explainable.** When the app grid changes throughout the day, users initially feel a mix of delight and unease. "How did it know?" We added micro-copy ("Based on your commute time") that transformed unease into trust. The AI was right — but it needed to show its work.
+
+**The transition is the product.** The unlock animation, the swipe gesture, the moment the content feed reveals — these transitions are where the value proposition is communicated. I spent more design hours on the 300ms unlock animation than on any individual screen.

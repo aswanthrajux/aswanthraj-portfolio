@@ -1,0 +1,260 @@
+---
+title: "Beyond Components: Building the Language of a Product Organisation"
+excerpt: "How a design system became the cultural infrastructure for 15+ products, and why the vocabulary we built in 2019 is the vocabulary AI design tools speak today."
+date: "2020-03-01"
+tag: "Design Systems · Enterprise"
+coverImage: "/images/case-studies/inmobi-ds-cover.webp"
+readTime: "10 min read"
+status: "published"
+---
+
+<SectionEyebrow>The Situation</SectionEyebrow>
+
+## Ten designers. Fifteen products. Zero shared language.
+
+In 2019, InMobi's design team was 10 people serving 15+ product lines across the programmatic advertising stack. A mature organisation that had scaled its product surface faster than its design infrastructure.
+
+Every product had its own visual language, its own component approach, its own interpretation of what "InMobi" meant. A user switching from DSP to SSP felt like they'd changed companies. The design debt was invisible to everyone except the people building it.
+
+The first instinct was to call it a consistency problem. That was wrong.
+
+<MetricsRow metrics={[
+  { value: "847", label: "Unique screens audited" },
+  { value: "23", label: "Button variants in production" },
+  { value: "14", label: "Colour palettes across products" },
+  { value: "0", label: "Shared component libraries" }
+]} />
+
+<SectionEyebrow>The Problem</SectionEyebrow>
+
+## Inconsistency was the symptom. The real problem was that every team had built a private dialect.
+
+The audit made the inconsistency visible. But inconsistency is a side-effect, not a root cause. You can mandate a style guide and get compliance without alignment.
+
+The real problem was vocabulary. When there's no shared language for design decisions, every call gets re-litigated from scratch, on every product, on every sprint, by every team.
+
+<Pullquote>A design system fails the moment using it requires more discipline than ignoring it.</Pullquote>
+
+What we needed wasn't a component library. It was a shared language that made the right choice structurally easier than the wrong one.
+
+<ReframeList items={[
+  ["Component", "Token"],
+  ["Consistency", "Confidence"],
+  ["Governance", "Adoption"]
+]} />
+
+<ImageCarousel
+  images={[
+    { src: "/images/case-studies/inmobi-ds-ui-1.webp", alt: "Inconsistent UI product 1" },
+    { src: "/images/case-studies/inmobi-ds-ui-2.webp", alt: "Inconsistent UI product 2" },
+    { src: "/images/case-studies/inmobi-ds-ui-3.webp", alt: "Inconsistent UI product 3" },
+    { src: "/images/case-studies/inmobi-ds-ui-4.webp", alt: "Inconsistent UI product 4" },
+    { src: "/images/case-studies/inmobi-ds-ui-5.webp", alt: "Inconsistent UI product 5" },
+    { src: "/images/case-studies/inmobi-ds-ui-6.webp", alt: "Inconsistent UI product 6" },
+    { src: "/images/case-studies/inmobi-ds-ui-7.webp", alt: "Inconsistent UI product 7" }
+  ]}
+  caption="The before state: 12 products, 12 different visual dialects. Same company, different design languages."
+/>
+
+<SectionEyebrow>The Foundation</SectionEyebrow>
+
+## Before a single component was designed, we had to agree on what things were called.
+
+The foundation isn't buttons or colour palettes. It's the token layer: named, semantic variables that every visual decision references. Get this wrong and everything built on top inherits the flaw.
+
+Three decisions determined everything downstream.
+
+<DecisionCards decisions={[
+  {
+    title: "Tokens, not values",
+    body: "Every design decision expressed as a named token: text.primary not #15181E. Tokens describe intent, not value. Meaning holds across themes, platforms, products. Max four parameters: Namespace / Object / Base / Modifier. The exact structures AI tools assume today. We built machine-readable intent before we knew machines would read it."
+  },
+  {
+    title: "Semantic naming everywhere",
+    body: "text.primary not text.dark. The name describes what it's for, not what it looks like. That's the difference between a token that survives a theme change and one that breaks it."
+  },
+  {
+    title: "A single spatial rule",
+    body: "Every spacing value is a multiple of 4px. Most align to an 8px grid. One constraint, no exceptions. This single rule eliminated 80% of spacing inconsistency across 15+ products without any governance overhead. Simple foundations create emergent consistency at every layer above them."
+  }
+]} />
+
+<MediaBlock
+  src="/images/case-studies/inmobi-ds-tokens.webp"
+  alt="Token naming structure"
+  caption="Token naming structure: a shared vocabulary between design and engineering"
+  fit="contain"
+/>
+
+Alongside the token work, we ran a product personality exercise before touching colour, mapping emotional moments across key journeys to find shared personality traits. The answer: helpful and caring, with intellectual rigour.
+
+That became the brief. Poppins as the typeface: geometric, unapologetic, precise. A 5-colour palette derived to full accessible scales using solid colours, not opacity.
+
+<MediaBlock
+  src="/images/case-studies/inmobi-ds-palette.webp"
+  alt="The final colour palette"
+  caption="The final colour palette: 5 brand colours, derived to WCAG AA compliance"
+  fit="contain"
+/>
+
+<MediaBlock
+  src="/images/case-studies/inmobi-ds-color-library.webp"
+  alt="Colour library with full accessible scales"
+  caption="Colour library: full accessible scales derived from 5 brand colours"
+  fit="contain"
+/>
+
+<MediaBlock
+  src="/images/case-studies/inmobi-ds-typography.webp"
+  alt="Poppins typeface specimen"
+  caption="Poppins: the typeface choice that came from personality, not preference"
+  fit="contain"
+/>
+
+<SectionEyebrow>The Method</SectionEyebrow>
+
+## Atomic design is not a process you follow. It's a way of seeing.
+
+We used atomic design not as a build sequence, but as a lens. At what level does this decision live, and what does it compose into?
+
+Sub-atomic (tokens). Atoms: colour, spacing, type. Molecules: input with label. Organisms: navigation, forms, modals. Templates. Pages.
+
+<SystemLoop
+  steps={["Audit", "Inventory", "Tokens", "Components", "Document", "Ship"]}
+  descriptions={[
+    "847 screens, 12 products. Make the chaos visible before reducing it. The audit was also political: each team seeing their inconsistency against the broader picture created the social conditions for change.",
+    "Filter accidental variants from intentional ones. We debated with dev and PM which components to keep. Removing one affects 18 live products. Those debates made decisions stick.",
+    "Sub-atomic layer first. Global tokens, then component-specific tokens. Build the vocabulary before building the components.",
+    "Prioritised by frequency of use and cost of inconsistency. For each component: inventory existing usage → consolidate variants → design all states → document → handoff.",
+    "Spec docs in Zeplin. Storybook as the live catalogue. Documentation is not the last step; it ships with the component.",
+    "Piloted on SSP: InMobi's most complex product. If it works there, it works everywhere. 600+ screens, 12 weeks."
+  ]}
+/>
+
+Atomic components with clear boundaries aren't just easier to maintain. They're what makes AI code generation reliable. The grammar had to exist before any tool could learn it.
+
+<MediaBlock
+  src="/images/case-studies/inmobi-ds-atomic.webp"
+  alt="Atomic design breakdown"
+  caption="The atomic breakdown: from sub-atomic tokens to full product pages"
+  fit="contain"
+/>
+
+<ImageCarousel
+  images={[
+    { src: "/images/case-studies/inmobi-ds-ssp-1.webp", alt: "SSP pilot screen 1" },
+    { src: "/images/case-studies/inmobi-ds-ssp-2.webp", alt: "SSP pilot screen 2" },
+    { src: "/images/case-studies/inmobi-ds-ssp-3.webp", alt: "SSP pilot screen 3" }
+  ]}
+  caption="SSP pilot: 600+ screens built using the design system in 12 weeks"
+/>
+
+<SectionEyebrow>Adoption</SectionEyebrow>
+
+## A library no one uses is just infrastructure debt with better typography.
+
+This is where most design systems die. The component library exists. Documentation is written. Nothing changes.
+
+The failure: treating adoption as a communication problem. Send an announcement, run a workshop, done. Adoption is a design problem. It needs to be designed like everything else.
+
+<DecisionCards decisions={[
+  {
+    title: "Champions, not mandates",
+    body: "One design system champion per product team. Champions onboarded their own team, escalated gaps directly, and created social accountability. The system wasn't coming from above. It was being advocated by someone in the room. That's a different kind of authority."
+  },
+  {
+    title: "Office hours, not announcements",
+    body: "Weekly 30-minute open sessions. Any designer could ask questions, flag gaps, or challenge decisions. The system felt like a conversation rather than a directive. Teams that can't get quick answers build around the system instead of into it. Office hours kept that from happening."
+  },
+  {
+    title: "Fast iteration on gaps",
+    body: "Any designer could file a gap request. Committed to a 2-week turnaround on all approved additions. A slow system calcifies. A responsive one grows. The signal that the system was alive and listening was as important as any individual component we added."
+  },
+  {
+    title: "Documentation as infrastructure",
+    body: "Every component spec, every usage guideline, every do/don't example, written with the same rigour as the component itself. The effort that felt like overhead in 2019 became the structured, semantic context AI tools consume to generate consistent output in 2024."
+  }
+]} />
+
+<MediaBlock src="/images/case-studies/inmobi-ds-spec-1.webp" alt="Component specification" natural noBorder />
+<MediaBlock src="/images/case-studies/inmobi-ds-spec-2.webp" alt="Component specification" natural noBorder />
+<MediaBlock src="/images/case-studies/inmobi-ds-spec-3.webp" alt="Component specification" natural noBorder />
+<MediaBlock src="/images/case-studies/inmobi-ds-spec-4.webp" alt="Component specification" natural noBorder />
+<MediaBlock src="/images/case-studies/inmobi-ds-spec-5.webp" alt="Component specification" natural noBorder />
+<MediaBlock src="/images/case-studies/inmobi-ds-spec-6.webp" alt="Component specification" natural noBorder />
+<MediaBlock src="/images/case-studies/inmobi-ds-spec-7.webp" alt="Component specification" caption="Component documentation: every spec shipped with the same rigour as the component itself" natural noBorder />
+
+<SectionEyebrow>My Role</SectionEyebrow>
+
+## I led every layer: from token architecture to team adoption.
+
+Not just component design. The intellectual work of the foundation, the organisational work of adoption, and the product management of a living system.
+
+- Defined the token architecture, naming conventions, and visual language from scratch
+- Owned end-to-end component design and documentation across 120+ components
+- Collaborated with Khaleel (Senior UX) and across dev, PM, and marketing from the earliest stages
+- Governed contributions: vetting additions, maintaining library integrity, owning the Sketch cloud and Storybook catalogue
+- Product-managed the system roadmap: gap requests, prioritisation, release cycles
+- Ran the SSP pilot to validate the system before organisation-wide rollout
+- Presented the system to design and engineering leadership to secure continued investment
+
+<SectionEyebrow>Impact</SectionEyebrow>
+
+## Sixteen products. One system.
+
+<StatGrid blocks={[
+  {
+    title: "Scale",
+    stats: [
+      { value: "16+", label: "Products built on InMobi Design System" },
+      { value: "120+", label: "Individual components" }
+    ]
+  },
+  {
+    title: "Velocity",
+    stats: [
+      { value: "3w → 1w", label: "Sprint cycle reduction" },
+      { value: "600+", label: "Screens delivered in 12 weeks on SSP pilot" }
+    ]
+  },
+  {
+    title: "Quality",
+    stats: [
+      { value: "90%", label: "Visual fitness without design QA" },
+      { value: "Significant", label: "Reduction in code changes before each release" }
+    ]
+  },
+  {
+    title: "Productivity",
+    stats: [
+      { value: "70%+", label: "Increase in designer and developer productivity" },
+      { value: "4 weeks", label: "MVP delivery time for new products" }
+    ]
+  }
+]} />
+
+<SectionEyebrow>What Didn't Work</SectionEyebrow>
+
+## Three things that are still honest problems.
+
+<FailureList items={[
+  {
+    title: "Governance overhead",
+    body: "Every change required formal sign-off, which slowed contributions and trust. Teams that couldn't get fast answers started building around the system. We replaced ceremony with conversation, but lost time and goodwill getting there."
+  },
+  {
+    title: "Building in Sketch without a migration plan",
+    body: "Built in Sketch, right call in 2019. No migration plan written. When the industry moved to Figma, the cost was significant: not just file conversion but rebuilding the entire component structure from a different mental model. Technology bets age. Migration plans don't."
+  },
+  {
+    title: "Documentation always lagged components",
+    body: "Components shipped before docs were ready. Teams defaulted to Slack questions over reading specs. Documentation is a product, not a deliverable. It needs its own roadmap and its own velocity."
+  }
+]} />
+
+<ClosingStatement lines={[
+  "The vocabulary we built in 2019 is the vocabulary AI design tools speak today.",
+  "Tokens. Semantic naming. Atomic structure.",
+  "We didn't know we were writing the grammar.",
+  "We just needed the system to work."
+]} />

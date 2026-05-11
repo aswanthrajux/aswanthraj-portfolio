@@ -1,0 +1,53 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# All video files — hosted externally on YouTube, never committed
+*.mp4
+*.mov
+*.webm
+*.avi
+*.mkv
+*.m4v
+*.wmv
+*.flv
+# Video directories
+public/videos/
+public/images/case-studies/videos/
+
+# Local asset archives (not deployed)
+archive/
+
+# YouTube upload staging folder
+youtube-upload/
+
+# Source asset originals (large videos/images, not deployed)
+Sources img videos/
+
+# Claude Code and AI tooling internals
+.claude/
+.superpowers/
+docs/superpowers/
+
+.env
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
