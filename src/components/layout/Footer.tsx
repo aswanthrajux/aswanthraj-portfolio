@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { Dribbble, Linkedin, Twitter, Instagram } from 'lucide-react'
 import { trackEvent } from '@/lib/analytics'
 
@@ -18,6 +18,20 @@ const NAV = [
 
 export default function Footer() {
   const year = new Date().getFullYear()
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const handleHashNav = (href: string) => {
+    const id = href.replace('/#', '')
+    if (location.pathname !== '/') {
+      navigate('/')
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+      }, 300)
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   return (
     <footer style={{ borderTop: '1px solid var(--color-border)', padding: '3rem 0' }}>
@@ -61,9 +75,14 @@ export default function Footer() {
                 onMouseLeave: (e: React.MouseEvent<HTMLElement>) => (e.currentTarget.style.color = 'var(--color-muted)'),
               }
               return item.href.startsWith('/#') ? (
-                <a key={item.label} href={item.href} style={linkStyle} {...handlers}>
+                <button
+                  key={item.label}
+                  onClick={() => handleHashNav(item.href)}
+                  style={{ ...linkStyle, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                  {...handlers}
+                >
                   {item.label}
-                </a>
+                </button>
               ) : (
                 <Link key={item.label} to={item.href} style={linkStyle} {...handlers}>
                   {item.label}

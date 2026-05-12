@@ -71,6 +71,7 @@ const CASE_STUDY_LIST = [
   },
   {
     slug: 'hub-lockscreen',
+    hidden: true,
     title: 'Hub & Lockscreen',
     excerpt: 'Reimagining mobile surfaces into intelligent spaces that deliver personalised content and boost app engagement.',
     tag: 'Mobile · Systems Design',
@@ -78,6 +79,7 @@ const CASE_STUDY_LIST = [
   },
   {
     slug: 'folderwall',
+    hidden: true,
     title: 'FolderWall',
     excerpt: 'A new paradigm for how users relate to their installed apps, through contextual grouping and intelligent recommendations.',
     tag: 'Product Innovation',
@@ -105,6 +107,8 @@ const CASE_STUDY_LIST = [
     gradient: 'linear-gradient(135deg, #1a0f0a 0%, #3d2010 50%, #2a0a0a 100%)',
   },
 ]
+
+const VISIBLE_CASE_STUDIES = CASE_STUDY_LIST.filter(c => !c.hidden)
 
 // ─── Module-level lazy MDX components (created ONCE, never recreated) ──────
 // This is the fix for flickering — lazy() must live outside any component body.
@@ -713,9 +717,9 @@ export default function CaseStudy() {
 
         {/* ── Next case study ── */}
         {slug && (() => {
-          const idx = CASE_STUDY_LIST.findIndex(c => c.slug === slug)
+          const idx = VISIBLE_CASE_STUDIES.findIndex(c => c.slug === slug)
           if (idx === -1) return null
-          const next = CASE_STUDY_LIST[(idx + 1) % CASE_STUDY_LIST.length]
+          const next = VISIBLE_CASE_STUDIES[(idx + 1) % VISIBLE_CASE_STUDIES.length]
           return (
             <Link
               to={`/case-study/${next.slug}`}
