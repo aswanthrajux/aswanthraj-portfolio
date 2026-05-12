@@ -14,7 +14,7 @@ export function initGA(): void {
 
   // gtag.js requires the Arguments object pushed to dataLayer, not a rest-params array.
   // Google's own TypeScript snippet does the same: accepts ...args but pushes `arguments`.
-  function gtag() { window.dataLayer!.push(arguments) }
+  function gtag(..._args: unknown[]) { window.dataLayer!.push(arguments) }
   window.gtag = gtag
 
   gtag('js', new Date())
