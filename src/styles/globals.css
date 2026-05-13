@@ -257,6 +257,7 @@ html.lenis {
   background-color: var(--color-text);
   color: var(--color-bg);
   border: none;
+  font-weight: 600;
 }
 
 .btn-outline {

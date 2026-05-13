@@ -406,7 +406,10 @@ export default function FeaturedWork() {
     const mm = gsap.matchMedia()
 
     mm.add('(min-width: 1025px)', () => {
-      const getTotalScroll = () => track.scrollWidth - window.innerWidth
+      // Chromium excludes trailing padding from scrollWidth on flex containers,
+      // so we add it back to ensure the last card lands with proper right breathing room.
+      const getTrackPaddingRight = () => parseFloat(getComputedStyle(track).paddingRight) || 0
+      const getTotalScroll = () => track.scrollWidth - window.innerWidth + getTrackPaddingRight()
 
       const tl = gsap.timeline({
         scrollTrigger: {
