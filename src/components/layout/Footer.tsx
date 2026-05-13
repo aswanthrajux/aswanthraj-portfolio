@@ -13,6 +13,7 @@ const NAV = [
   { label: 'AI Labs', href: '/#ai-labs' },
   { label: 'About', href: '/about' },
   { label: 'Philosophy', href: '/philosophy' },
+  { label: 'Privacy', href: '/privacy' },
 ]
 
 export default function Footer() {
