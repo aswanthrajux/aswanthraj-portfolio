@@ -1,11 +1,10 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { Dribbble, Linkedin, Twitter, Instagram } from 'lucide-react'
+import { Dribbble, Linkedin, Instagram } from 'lucide-react'
 import { trackEvent } from '@/lib/analytics'
 
 const SOCIAL = [
   { icon: Dribbble, label: 'Dribbble', href: 'https://dribbble.com/ashwanth' },
   { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/ashwanthraj/' },
-  { icon: Twitter, label: 'X', href: 'https://x.com/aswanthraj' },
   { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/ashwanthux/' },
 ]
 

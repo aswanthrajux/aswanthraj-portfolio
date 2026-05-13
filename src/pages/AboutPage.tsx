@@ -5,6 +5,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { FadeIn } from '@/components/ui/FadeIn'
 import { SEO } from '@/components/ui/SEO'
+import { getLenis } from '@/hooks/useLenis'
 
 // ─── Data ──────────────────────────────────────────────────────────────────
 
@@ -96,8 +97,15 @@ function SectionLabel({ label }: { label: string }) {
 // ─── Page ──────────────────────────────────────────────────────────────────
 
 export default function AboutPage() {
-  // Always start at the top of the page
-  useEffect(() => { window.scrollTo(0, 0) }, [])
+  // Always start at the top — use Lenis to reset both scroll position and target
+  useEffect(() => {
+    const lenis = getLenis()
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 0 } as Parameters<typeof lenis.scrollTo>[1])
+    } else {
+      window.scrollTo(0, 0)
+    }
+  }, [])
 
   return (
     <>

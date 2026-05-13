@@ -420,7 +420,10 @@ export default function FeaturedWork() {
         },
       })
 
-      tl.to(track, { x: () => -getTotalScroll(), ease: 'none' })
+      // 88% of scroll animates the track; final 12% holds at end position so the
+      // last card is fully visible before the pin releases (scrub:1 catch-up time).
+      tl.to(track, { x: () => -getTotalScroll(), ease: 'none', duration: 0.88 })
+      tl.to({}, { duration: 0.12 })
 
       return () => {
         ScrollTrigger.getAll().forEach(st => st.kill())
