@@ -94,13 +94,13 @@ export default function About() {
                 overflow: 'hidden',
               }}>
                 <img
-                  src="/images/aswanth-portrait.webp"
+                  src="/images/aswanth-anniversary.webp"
                   alt="Aswanth Raj"
                   style={{
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
-                    objectPosition: 'center top',
+                    objectPosition: 'center center',
                     display: 'block',
                   }}
                 />

@@ -280,7 +280,7 @@ function TableOfContents({ items, activeId }: { items: ToCItem[]; activeId: stri
                   lineHeight: 1.45,
                   color: isActive ? 'var(--color-text)' : 'var(--color-muted)',
                   textDecoration: 'none',
-                  padding: '0.25rem 0.625rem',
+                  padding: '0.4rem 0.625rem',
                   paddingLeft: item.level === 3 ? '1.125rem' : '0.625rem',
                   borderLeft: `2px solid ${isActive ? 'var(--color-text)' : 'var(--color-border)'}`,
                   transition: 'color 0.2s ease, border-color 0.2s ease',
